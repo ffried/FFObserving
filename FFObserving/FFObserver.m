@@ -150,6 +150,7 @@ static NSKeyValueObservingOptions const FFObserverOptions = (NSKeyValueObserving
             __weak __typeof(self) weakself = self;
             [self.queue addOperationWithBlock:^{
                 __strong __typeof(weakself) strongself = weakself;
+                if (!strongself.block) return;
                 strongself.block(strongself, ((objectMatches) ? strongself.observedObject : object), change);
             } waitUntilFinished:![self.queue isCurrentQueue]];
         }

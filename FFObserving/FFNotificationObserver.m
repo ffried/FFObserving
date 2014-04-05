@@ -171,6 +171,7 @@
         __weak __typeof(self) weakself = self;
         [self.queue addOperationWithBlock:^{
             __strong __typeof(weakself) strongself = weakself;
+            if (!strongself.block) return;
             strongself.block(strongself, note, note.userInfo);
         } waitUntilFinished:![self.queue isCurrentQueue]];
     }
